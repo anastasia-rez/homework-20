@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список товаров</title>
+
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="./assets/css/style.css">
+
+    <script type="importmap">
+        {
+            "imports": {
+                "vue": "./node_modules/vue/dist/vue.esm-browser.prod.js"
+            }
+        }
+    </script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <script type="module" src="./assets/js/app.js"></script>
+
+</head>
+<body>
+    <div class="container pt-4" id="app">
+
+        
+
+        <h1>{{title}}</h1>
+
+        <h3 class="py-3"> <i class="fa-solid fa-cart-shopping "></i> ({{ selectedList.lenght }}) Total Cost: {{totalCost.toFixed(2)}} $</h3>
+
+        <input id='search' class='me-auto mb-2' type="text" placeholder="Поиск..." v-model="search">
+
+        <div class="form-check">
+            
+            <input id="sort-up" value="up" class="form-check-input" type="radio" name="sort" v-model="sort">
+            <label class="form-check-label" for="flexRadioDefault1">
+              Сначала дешевое
+            </label>
+
+        </div>
+
+        <div class="form-check">
+
+            <input id='sort-down' class="form-check-input" type="radio" name="flexRadioDefault" value='down' name='sort' v-model="sort">
+            <label class="form-check-label" for="flexRadioDefault2">
+              Сначала дорогое 
+            </label>
+            
+        </div>
+
+        <div class="range-slider mt-3">
+            <input 
+                type="range" 
+                class="m-3" 
+                min="0" 
+                max="1000" 
+                step="10"
+                v-model.number="minPrice"
+                @click="sortRange"
+            >
+
+            <input 
+                type="range" 
+                class="m-3" 
+                min="0" 
+                max="1000" 
+                step="10"
+                v-model.number="maxPrice"
+                @click="sortRange"
+            >
+        </div>
+
+        <div class="range-values">
+            <p>Min: {{minPrice}}</p>
+            <p>Max: {{maxPrice}}</p>
+        </div>
+
+        
+
+        <div class="row row-cols-2 row-cols-lg-5">
+            
+            <one-item v-for="item in listToShow" 
+            :product-item="item"
+            :inc-func="incQtFactory(item)"
+            :dec-func="decQtFactory(item)"
+            :update-select="changeSelect(item)"
+        >
+
+            </one-item>
+
+        </div>
+
+    </div>
+</body>
+</html>
