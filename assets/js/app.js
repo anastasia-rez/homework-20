@@ -84,19 +84,12 @@ createApp({
             )
         );
 
-        const selectedSum = reactive([]);
 
-        const selectedList = computed(() => selectedSum
-        .filter(item => item.selected)
-        .map(item => item.price));
-
-        const changeSelect = (item) => {
-            return () => {
-                item.selected = !item.selected;
-                console.log(`${item.qt} : ${item.selected}`)
-            }
-        }
-
+        const totalCount = computed(() =>
+                list.reduce(
+                    (acc, item) => acc + item.qt, 0
+                )
+        );
 
         return {
             title,
@@ -110,9 +103,7 @@ createApp({
             incQtFactory,
             decQtFactory,
             totalCost,
-            selectedSum,
-            selectedList,
-            changeSelect
+            totalCount
         }
     },
 

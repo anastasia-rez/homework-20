@@ -1,7 +1,7 @@
 import{ref, reactive } from 'vue';
 
 export default {
-    props: ['productItem', 'incFunc', 'decFunc', 'sumProducts','updateSelect'],
+    props: ['productItem', 'incFunc', 'decFunc'],
     setup(props){
 
 
@@ -30,7 +30,7 @@ export default {
                         <button @click="props.decFunc" class="btn btn-danger">-1</button>
                         <p class="text-center fs-3">{{props.productItem.qt}}</p>
 
-                        <button @click="props.incFunc" @click="props.updateSelect()" :class="{'btn-info': props.productItem.selected}" class="btn btn-success"> +1 </button>
+                        <button @click="props.incFunc" :class="{'btn-info': props.productItem.selected}" class="btn btn-success"> +1 </button>
 
                         <p class="fs-3">= {{(props.productItem.qt * props.productItem.price).toFixed(2)}} $.</p>
                     

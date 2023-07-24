@@ -29,7 +29,7 @@
 
         <h1>{{title}}</h1>
 
-        <h3 class="py-3"> <i class="fa-solid fa-cart-shopping "></i> ({{ selectedList.lenght }}) Total Cost: {{totalCost.toFixed(2)}} $</h3>
+        <h3 class="py-3"> <i class="fa-solid fa-cart-shopping "></i> ({{ totalCount }}) Total Cost: {{totalCost.toFixed(2)}} $</h3>
 
         <input id='search' class='me-auto mb-2' type="text" placeholder="Поиск..." v-model="search">
 
@@ -86,7 +86,6 @@
             :product-item="item"
             :inc-func="incQtFactory(item)"
             :dec-func="decQtFactory(item)"
-            :update-select="changeSelect(item)"
         >
 
             </one-item>
